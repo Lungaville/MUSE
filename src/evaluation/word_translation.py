@@ -33,6 +33,7 @@ def load_identical_char_dico(word2id1, word2id2):
 
     # sort the dictionary by source word frequencies
     pairs = sorted(pairs, key=lambda x: word2id1[x[0]])
+    print(pairs[0:100])
     dico = torch.LongTensor(len(pairs), 2)
     for i, (word1, word2) in enumerate(pairs):
         dico[i, 0] = word2id1[word1]
