@@ -59,3 +59,5 @@ if params.tgt_lang:
     evaluator.word_translation(to_log)
     evaluator.sent_translation(to_log)
     evaluator.dist_mean_cosine(to_log)
+
+print(to_log)
