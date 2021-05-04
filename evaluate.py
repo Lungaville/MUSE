@@ -72,5 +72,5 @@ log_export['csls-10'] = to_log['precision_at_10-csls_knn_10']
 log_export['mean-cosine-nn']= to_log['mean_cosine-nn-S2T-10000']
 log_export['mean-cosine-csls']= to_log['mean_cosine-csls_knn_10-S2T-10000']
 print(log_export)
-df = pd.DataFrame.from_dict(log_export, orient="index")
+df = pd.DataFrame.from_dict(log_export)
 df.to_csv(f"/kaggle/working/{log_export['name']}.csv")
