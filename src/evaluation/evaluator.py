@@ -35,7 +35,7 @@ class Evaluator(object):
         self.discriminator = trainer.discriminator
         self.params = trainer.params
 
-    def monolingual_wordsim(self, to_log):
+    def monolingual_wordsim(self, to_log,log_export=None):
         """
         Evaluation on monolingual word similarity.
         """
@@ -52,17 +52,23 @@ class Evaluator(object):
             logger.info("Monolingual source word similarity score average: %.5f" % src_ws_monolingual_scores)
             to_log['src_ws_monolingual_scores'] = src_ws_monolingual_scores
             to_log.update({'src_' + k: v for k, v in src_ws_scores.items()})
+            if(log_export !=None):
+                log_export['word_similarity_avg'] = src_ws_monolingual_scores
         if tgt_ws_scores is not None:
             tgt_ws_monolingual_scores = np.mean(list(tgt_ws_scores.values()))
             logger.info("Monolingual target word similarity score average: %.5f" % tgt_ws_monolingual_scores)
             to_log['tgt_ws_monolingual_scores'] = tgt_ws_monolingual_scores
             to_log.update({'tgt_' + k: v for k, v in tgt_ws_scores.items()})
+            if(log_export !=None):
+                log_export['word_similarity_avg'] = tgt_ws_monolingual_scores
         if src_ws_scores is not None and tgt_ws_scores is not None:
             ws_monolingual_scores = (src_ws_monolingual_scores + tgt_ws_monolingual_scores) / 2
             logger.info("Monolingual word similarity score average: %.5f" % ws_monolingual_scores)
             to_log['ws_monolingual_scores'] = ws_monolingual_scores
+            if(log_export !=None):
+                log_export['word_similarity_avg'] = ws_monolingual_scores
 
-    def monolingual_wordanalogy(self, to_log):
+    def monolingual_wordanalogy(self, to_log,log_export=None):
         """
         Evaluation on monolingual word analogy.
         """
@@ -80,11 +86,15 @@ class Evaluator(object):
             logger.info("Monolingual source word analogy score average: %.5f" % src_analogy_monolingual_scores)
             to_log['src_analogy_monolingual_scores'] = src_analogy_monolingual_scores
             to_log.update({'src_' + k: v for k, v in src_analogy_scores.items()})
+            if(log_export !=None):
+                log_export['word_analogy_avg'] = src_analogy_monolingual_scores
         if self.params.tgt_lang and tgt_analogy_scores is not None:
             tgt_analogy_monolingual_scores = np.mean(list(tgt_analogy_scores.values()))
             logger.info("Monolingual target word analogy score average: %.5f" % tgt_analogy_monolingual_scores)
             to_log['tgt_analogy_monolingual_scores'] = tgt_analogy_monolingual_scores
             to_log.update({'tgt_' + k: v for k, v in tgt_analogy_scores.items()})
+            if(log_export !=None):
+                log_export['word_analogy_avg'] = tgt_analogy_monolingual_scores
 
     def crosslingual_wordsim(self, to_log):
         """
